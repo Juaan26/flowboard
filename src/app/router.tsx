@@ -2,23 +2,26 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import LoginPage from "../features/auth/pages/LoginPage"
-import  DashboardPage  from "../features/board/pages/DashboardPage"
-import  ProjectPage  from "../features/board/pages/ProjectPage"
-import  NotFoundPage  from "../shared/pages/NotFoundPage"
+import DashboardPage from "../features/board/pages/DashboardPage"
+import ProjectPage from "../features/board/pages/ProjectPage"
+import NotFoundPage from "../shared/pages/NotFoundPage"
+import { ProtectedRoute } from './ProtectedRoute'
 
 function AppRouter() {
 
 
-    return (
-     <BrowserRouter>
+  return (
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/project/:id" element={<ProjectPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/" element={ <Navigate to="/dashboard" replace /> } />
+        <Route path="/login" element={ <LoginPage /> } />
+        <Route element={ <ProtectedRoute /> }>
+          <Route path="/dashboard" element={ <DashboardPage /> } />
+          <Route path="/project/:id" element={ <ProjectPage /> } />
+        </Route>
+      <Route path="*" element={ <NotFoundPage /> } />
+    </Routes>
+    </BrowserRouter >
     )
 
 }
