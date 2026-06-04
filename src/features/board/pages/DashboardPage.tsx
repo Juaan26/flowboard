@@ -1,9 +1,11 @@
+import { Header } from "../components/Header"
 function DashboardPage () {
 
 
 
     return(
         <>
+        <Header />
         <section>
             <h2>
                 Tabla
